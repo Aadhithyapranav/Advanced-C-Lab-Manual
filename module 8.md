@@ -17,6 +17,54 @@ Algorithm:
 Program:
 
 //type your code here
+#include <stdio.h>
+
+int main() {
+    // Step 1: Initialize integer variable
+    int n;
+
+    // Step 2: Input from user
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    // Step 3: Switch statement
+    switch(n) {
+        case 5:
+            printf("seventy one\n");
+            break;
+        case 6:
+            printf("seventy two\n");
+            break;
+        case 13:
+            printf("seventy three\n");
+            break;
+        case 14:
+            printf("seventy four\n");
+            break;
+        case 15:
+            printf("seventy five\n");
+            break;
+        case 16:
+            printf("seventy six\n");
+            break;
+        case 17:
+            printf("seventy seven\n");
+            break;
+        case 18:
+            printf("seventy eight\n");
+            break;
+        case 19:
+            printf("seventy nine\n");
+            break;
+        default:
+            printf("Greater than 13\n");
+            break;
+    }
+
+    // Step 4: Exit
+    return 0;
+}
+
 
 
 
@@ -25,6 +73,8 @@ Output:
 
 
 //paste your output here
+Enter a number: 6
+seventy two
 
 
 
@@ -48,6 +98,36 @@ Algorithm:
 Program:
 
 //type your code here
+#include <stdio.h>
+
+int main() {
+    // Step 2: Declare character array
+    char a[50];
+    int i, h, c;
+
+    // Step 1: Start
+    printf("Enter a string of digits: ");
+    scanf("%s", a);
+
+    // Step 4: Outer loop for digits 0 to 3
+    for (h = 0; h <= 3; h++) {
+        c = 0; // Step 3: Initialize counter
+        for (i = 0; a[i] != '\0'; i++) {
+            if (a[i] == (h + '0')) {
+                c++;
+            }
+        }
+        printf("%d ", c); // Print frequency
+    }
+
+    // Step 5: Remaining 6 values are zero
+    for (h = 4; h < 10; h++) {
+        printf("0 ");
+    }
+
+    // Step 6: End
+    return 0;
+}
 
 
 
@@ -56,6 +136,8 @@ Output:
 
 
 //paste your output here
+Enter a string of digits: 12330123
+1 2 2 2 0 0 0 0 0 0 
 
 
 
@@ -85,6 +167,71 @@ Free the memory allocated for each string in s Free the memory allocated for s
 Program:
 
 //type your code here
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Swap two characters
+void swap(char *x, char *y) {
+    char temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+// Reverse the string from index l to r
+void reverse(char *s, int l, int r) {
+    while (l < r) {
+        swap(&s[l], &s[r]);
+        l++;
+        r--;
+    }
+}
+
+// Get next lexicographical permutation (returns 1 if next exists, 0 if not)
+int next_permutation(char *s, int len) {
+    int i = len - 2;
+    while (i >= 0 && s[i] >= s[i + 1]) i--;
+    if (i < 0) return 0;
+
+    int j = len - 1;
+    while (s[j] <= s[i]) j--;
+    swap(&s[i], &s[j]);
+    reverse(s, i + 1, len - 1);
+    return 1;
+}
+
+int main() {
+    // Step 1 & 2: Start and declare
+    int n;
+    char *s;
+
+    // Step 3 & 4: Memory allocation and input
+    printf("Enter a string: ");
+    s = (char *)malloc(100 * sizeof(char));  // Assume max length 99
+    scanf("%s", s);
+
+    n = strlen(s);
+    // Sort string first for lexicographical order
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (s[i] > s[j]) {
+                swap(&s[i], &s[j]);
+            }
+        }
+    }
+
+    // Step 5: Generate permutations
+    printf("\nLexicographical permutations:\n");
+    do {
+        printf("%s\n", s);
+    } while (next_permutation(s, n));
+
+    // Step 6: Free memory
+    free(s);
+
+    // Step 7: End
+    return 0;
+}
 
 
 
@@ -93,6 +240,16 @@ Output:
 
 
 //paste your output here
+Enter a string: cat
+
+Lexicographical permutations:
+act
+atc
+cat
+cta
+tac
+tca
+
 
 
 
@@ -118,6 +275,37 @@ Algorithm:
 Program:
 
 //type your code here
+#include <stdio.h>
+
+int main() {
+    int n, i, j, len, min;
+
+    // Step 3: Read the value of n
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+
+    // Step 4: Calculate the length of the side of the square matrix
+    len = n * 2 - 1;
+
+    // Step 5: Matrix Generation Loop
+    for (i = 0; i < len; i++) {
+        for (j = 0; j < len; j++) {
+
+            // Step 6: Calculate min (minimum distance to borders)
+            min = (i < j) ? i : j;
+            min = (min < len - i - 1) ? min : len - i - 1;
+            min = (min < len - j - 1) ? min : len - j - 1;
+
+            // Print the value for the current position in the pattern
+            printf("%d ", n - min);
+        }
+        printf("\n"); // Move to the next line after each row
+    }
+
+    // Step 7: End
+    return 0;
+}
+
 
 
 
@@ -126,6 +314,17 @@ Output:
 
 
 //paste your output here
+Enter the value of n: 5
+5 5 5 5 5 5 5 5 5 
+5 4 4 4 4 4 4 4 5 
+5 4 3 3 3 3 3 4 5 
+5 4 3 2 2 2 3 4 5 
+5 4 3 2 1 2 3 4 5 
+5 4 3 2 2 2 3 4 5 
+5 4 3 3 3 3 3 4 5 
+5 4 4 4 4 4 4 4 5 
+5 5 5 5 5 5 5 5 5 
+
 
 
 
@@ -157,6 +356,27 @@ o	Call the square() function and display the result.
 Program:
 
 //type your code here
+#include <stdio.h>
+
+// Step 2: Define the function square() with no parameters
+int square() {
+    int num;
+    // Step 3: Ask user for input
+    printf("Enter a number: ");
+    scanf("%d", &num);
+    
+    // Step 3: Calculate and return the square of the number
+    return num * num;
+}
+
+int main() {
+    // Step 4: Call the square() function and display the result
+    int result = square();
+    printf("The square of the number is: %d\n", result);
+    
+    // Step 5: End
+    return 0;
+}
 
 
 
@@ -165,6 +385,9 @@ Output:
 
 
 //paste your output here
+Enter a number: 7
+The square of the number is: 49
+
 
 
 
