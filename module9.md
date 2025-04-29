@@ -12,12 +12,104 @@ Algorithm:
 7.	Use the display function to visualize the stack's contents
  
 Program:
+#include <stdio.h>
+#define SIZE 5  // Define maximum size of the stack
 
-//type your code here
+int stack[SIZE];
+int top = -1;
+
+// Function to push an element into the stack
+void push(int value) {
+    if (top == SIZE - 1) {
+        printf("Stack Overflow\n");
+    } else {
+        top++;
+        stack[top] = value;
+        printf("Pushed %d into the stack.\n", value);
+    }
+}
+
+// Function to pop an element from the stack
+void pop() {
+    if (top == -1) {
+        printf("Stack Underflow\n");
+    } else {
+        printf("Popped %d from the stack.\n", stack[top]);
+        top--;
+    }
+}
+
+// Function to display elements of the stack
+void display() {
+    if (top == -1) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("Stack elements are:\n");
+        for (int i = top; i >= 0; i--) {
+            printf("%d\n", stack[i]);
+        }
+    }
+}
+
+// Main function
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n--- Stack Menu ---\n");
+        printf("1. Push\n2. Pop\n3. Display\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to push: ");
+                scanf("%d", &value);
+                push(value);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+}
+
+
 
 Output:
 
-//paste your output here
+--- Stack Menu ---
+1. Push
+2. Pop
+3. Display
+4. Exit
+Enter your choice: 1
+Enter value to push: 10
+Pushed 10 into the stack.
+
+Enter your choice: 1
+Enter value to push: 20
+Pushed 20 into the stack.
+
+Enter your choice: 3
+Stack elements are:
+20
+10
+
+Enter your choice: 2
+Popped 20 from the stack.
+
+Enter your choice: 3
+Stack elements are:
+10
+
 
 
 
@@ -35,12 +127,54 @@ Algorithm:
 4.	Call the push function as needed.
  
 Program:
+#include <stdio.h>
+#define SIZE 10  // Maximum size of the stack
 
-//type your code here
+float stack[SIZE];  // Stack array to hold float elements
+int top = -1;       // Stack top initialized to -1 (empty stack)
+
+// Function to push a float element into the stack
+void push(float value) {
+    if (top >= SIZE - 1) {
+        printf("Stack Overflow! Cannot push %.2f\n", value);
+    } else {
+        top++;
+        stack[top] = value;
+        printf("Pushed %.2f into the stack.\n", value);
+    }
+}
+
+// Main function
+int main() {
+    float value;
+    int n, i;
+
+    printf("Enter the number of elements to push: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter element %d: ", i + 1);
+        scanf("%f", &value);
+        push(value);
+    }
+
+    return 0;
+}
+
+
+
 
 Output:
 
-//paste your output here
+
+Enter the number of elements to push: 3
+Enter element 1: 10.5
+Pushed 10.50 into the stack.
+Enter element 2: 20.25
+Pushed 20.25 into the stack.
+Enter element 3: 30.75
+Pushed 30.75 into the stack.
+
 
 
 
@@ -62,11 +196,106 @@ Algorithm:
  
 Program:
 
-//type your code here
+#include <stdio.h>
+#define SIZE 10  // Maximum size of the queue
+
+int queue[SIZE];   // Queue array
+int front = -1;    // Index of front element
+int rear = -1;     // Index of rear element
+
+// Function to enqueue an element
+void enqueue(int value) {
+    if (rear == SIZE - 1) {
+        printf("Queue Overflow\n");
+    } else {
+        if (front == -1)
+            front = 0;
+        rear++;
+        queue[rear] = value;
+        printf("Enqueued %d into the queue.\n", value);
+    }
+}
+
+// Function to dequeue an element
+void dequeue() {
+    if (front == -1 || front > rear) {
+        printf("Queue Underflow\n");
+    } else {
+        printf("Dequeued %d from the queue.\n", queue[front]);
+        front++;
+    }
+}
+
+// Function to display queue elements
+void display() {
+    if (front == -1 || front > rear) {
+        printf("Queue is empty.\n");
+    } else {
+        printf("Queue elements are:\n");
+        for (int i = front; i <= rear; i++) {
+            printf("%d ", queue[i]);
+        }
+        printf("\n");
+    }
+}
+
+// Main function
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n--- Queue Menu ---\n");
+        printf("1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to enqueue: ");
+                scanf("%d", &value);
+                enqueue(value);
+                break;
+            case 2:
+                dequeue();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+}
+
 
 Output:
 
-//paste your output here
+--- Queue Menu ---
+1. Enqueue
+2. Dequeue
+3. Display
+4. Exit
+Enter your choice: 1
+Enter value to enqueue: 10
+Enqueued 10 into the queue.
+
+Enter your choice: 1
+Enter value to enqueue: 20
+Enqueued 20 into the queue.
+
+Enter your choice: 3
+Queue elements are:
+10 20
+
+Enter your choice: 2
+Dequeued 10 from the queue.
+
+Enter your choice: 3
+Queue elements are:
+20
+
 
 
 Result:
@@ -86,11 +315,54 @@ Algorithm:
 
 Program:
 
-//type your code here
+#include <stdio.h>
+#define SIZE 10  // Define the maximum size of the queue
+
+float queue[SIZE];  // Array to store float queue elements
+int front = -1;     // Front index
+int rear = -1;      // Rear index
+
+// Function to insert a float element into the queue
+void enqueue(float value) {
+    if (rear == SIZE - 1) {
+        printf("Queue Overflow! Cannot enqueue %.2f\n", value);
+    } else {
+        if (front == -1)  // First element insertion
+            front = 0;
+        rear++;
+        queue[rear] = value;
+        printf("Enqueued %.2f into the queue.\n", value);
+    }
+}
+
+// Main function
+int main() {
+    int n;
+    float value;
+
+    printf("Enter the number of elements to enqueue: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Enter float element %d: ", i + 1);
+        scanf("%f", &value);
+        enqueue(value);
+    }
+
+    return 0;
+}
+
 
 Output:
 
-//paste your output here
+Enter the number of elements to enqueue: 3
+Enter float element 1: 10.5
+Enqueued 10.50 into the queue.
+Enter float element 2: 20.25
+Enqueued 20.25 into the queue.
+Enter float element 3: 30.75
+Enqueued 30.75 into the queue.
+
 
 Result:
 Thus, the program to insert elements in queue using array is verified successfully.
@@ -121,11 +393,88 @@ o	After deletion, check if the front pointer has passed the rear pointer (front 
 
 Program:
 
-//type your code here
+#include <stdio.h>
+#define SIZE 10  // Define maximum queue size
+
+float queue[SIZE];  // Queue array for float values
+int front = -1;     // Front index
+int rear = -1;      // Rear index
+
+// Function to enqueue a float element into the queue
+void enqueue(float value) {
+    if (rear == SIZE - 1) {
+        printf("Queue Overflow! Cannot enqueue %.2f\n", value);
+    } else {
+        if (front == -1)  // First element insertion
+            front = 0;
+        rear++;
+        queue[rear] = value;
+        printf("Enqueued %.2f into the queue.\n", value);
+    }
+}
+
+// Function to delete (dequeue) an element from the queue
+void dequeue() {
+    if (front == -1) {
+        printf("Queue Underflow! Queue is empty.\n");
+    } else {
+        printf("Dequeued %.2f from the queue.\n", queue[front]);
+        front++;
+
+        // Reset if queue becomes empty
+        if (front > rear) {
+            front = -1;
+            rear = -1;
+        }
+    }
+}
+
+// Function to display the queue
+void display() {
+    if (front == -1) {
+        printf("Queue is empty.\n");
+    } else {
+        printf("Queue elements are:\n");
+        for (int i = front; i <= rear; i++) {
+            printf("%.2f ", queue[i]);
+        }
+        printf("\n");
+    }
+}
+
+// Main function
+int main() {
+    enqueue(10.5);
+    enqueue(20.25);
+    enqueue(30.75);
+
+    display();
+
+    dequeue();  // Delete front element
+    display();
+
+    dequeue();
+    dequeue();
+    dequeue();  // Extra delete to show underflow
+
+    return 0;
+}
+
 
 Output:
 
-//paste your output here
+Enqueued 10.50 into the queue.
+Enqueued 20.25 into the queue.
+Enqueued 30.75 into the queue.
+Queue elements are:
+10.50 20.25 30.75 
+Dequeued 10.50 from the queue.
+Queue elements are:
+20.25 30.75 
+Dequeued 20.25 from the queue.
+Dequeued 30.75 from the queue.
+Queue Underflow! Queue is empty.
+
 
 
 Result:
